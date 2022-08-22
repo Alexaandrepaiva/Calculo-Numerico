@@ -23,5 +23,5 @@ def f(x):
 def phi(x):
     return 11.7/2 - 17.7/x/2 + 5/2*x**(-2);
 
-root_f = pontoFixo(f, phi, -1, 0.001, 20);
+root_f = pontoFixo(f, phi, 3, 0.001, 3);
 print('A raiz de f vale ' + str(root_f[-1]));
