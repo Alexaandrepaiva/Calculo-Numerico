@@ -1,19 +1,17 @@
-import matplotlib.pyplot as plt
-import numpy as np
-import math
+import matplotlib.pyplot as plt;
+import numpy as np;
+import math;
 
 #Definir variáveis
-x = np.arange(0, 3, 0.01);
-Q=20;
-g=9.81;
+
+x = np.arange(-2, 5, 0.01);
 
 #Definir funções
-A = 27*x**3 + 27/2*x**4 + 9*x**5/4 + (x**6)/8;
-B = 3+x;
-y = B*Q**2 - g*A;
+
+y = 2*x**3 - 11.7*x**2 + 17.7*x - 5;
 
 #Personalisar eixos
-plt.title('Questão 1a')
+plt.title('Gráfico da questão X')
 plt.xlabel('X-Axis')
 plt.ylabel('Y-Axis')
 ax = plt.gca()

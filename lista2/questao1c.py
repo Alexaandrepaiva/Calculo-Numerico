@@ -2,14 +2,14 @@ import math;
 import numpy as np;
 import matplotlib.pyplot as plt;
 
-def bissection(f, lowerLimit, higherLimit, tol, iterationNumber=100):
+def falsePositive(f, lowerLimit, higherLimit, tol, iterationNumber=100):
     a = lowerLimit;
     b = higherLimit;
     err = b - a;
     i = 0;
 
     while (err > tol):
-        x = (a + b)/2;
+        x = (a * abs(f(b)) + b * abs(f(a)))/(abs(f(a)) + abs(f(b)));
         i = i + 1;
         
         if i >= iterationNumber:
@@ -20,7 +20,7 @@ def bissection(f, lowerLimit, higherLimit, tol, iterationNumber=100):
 
         else:
             b = x;
-        err = b - a;
+        err = np.abs(f(x));
 
     return [x, err, i]
     
@@ -33,7 +33,7 @@ def f(x):
     g = 9.81
     return (B)*Q**2 - g*(A)
 
-root_f, error, iteration = bissection(f, 0.1, 2.5, 0.01,10)
+root_f, error, iteration = falsePositive(f, 0.1, 2.5, 0.01,10)
 
 # str(number) só transforma um número em string
 print('A raiz de f vale ' + str(root_f) + ', com erro ' + str(error) + 'e com ' + str(iteration) + ' iteracoes.')

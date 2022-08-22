@@ -1,58 +1,34 @@
-# importa a biblioteca math
+# importar a biblioteca
+import matplotlib.pyplot as plt;
+import numpy as np;
 import math;
 
-# função do método da bisseção
+def bissection(f, lowerLimit, higherLimit, tol, iterationNumber=100):
+    a = lowerLimit;
+    b = higherLimit;
+    err = b - a;
+    i = 0;
 
-# esse método se baseia no fato de que se f(a) * f(b) < 0, com certeza há uma raiz em [a, b]
-
-# recebe a função original (f), um intervalo em que com certeza há uma raiz [xMin, xMax] e a 
-# tolerância para o erro da raiz (tol)
-
-def bissection(f, xMin, xMax, tol):
-
-    a = xMin;
-    b = xMax;
-    err = b - a; # erro => tamanho do intervalo em que temos certeza de que há uma raiz
-    
-    x_k = []; # array com os valores testados de x
-    y_k = []; # array com os correspondentes f(x)
-
-    # enquanto o erro for maior que a tolerância permitida
-    while(err > tol):
-
-        # defina x como o ponto médio do meu intervalo [a, b]
-        # ou a raiz está em [a, x] ou em [x, b]
+    while (err > tol):
         x = (a + b)/2;
+        i = i + 1;
+        
+        if i >= iterationNumber:
+            break;
 
-        # esse pedaço é só para adicionar os valores que testamos de x e f(x) em arrays, para controle (não obrigatório)
-        x_k.append(x);
-        y_k.append(f(x));
-
-        # a lógica é: se f(x) * f(a) for menor que 0, a raiz ESTÁ nesse NOVO intervalo [a, x]
-        # então podemos aplicar esse método novamente, mas para uma BISSEÇÃO do meu intervalo
-        # e então seguimos dividindo meu intervalo em dois, sempre escolhendo a bisseção que podemos garantir a existência da raiz
-
-        # se a raiz não está em [a, x], o meu novo a será meu x
         if(f(x) * f(a) > 0):
             a = x;
-        # se está em [a, x], meu novo b será meu x
+
         else:
             b = x;
-        err = b - a;
+        err = np.abs(f(x));
 
-    # print das arrays de controle
-    #print(x_k);
-    #print(y_k);
-
-    return [x, err];
-
+    return [x, err, i]
 
 # função em questão que quero achar a raiz
-def f(x): 
-    return x-1;
+def f(x):
+    return 
 
-root_f = bissection(f, 0, 3, 0.001)[0];
-error = bissection(f, 0, 3, 0.001)[1];
+root_f, error, iteration = bissection(f, 0.5, 2.5, 0.01,10)
 
-# str(number) só transforma um número em string
-print('A raiz de f vale ' + str(root_f) + ', com erro ' + str(error));
+print('A raiz de f vale ' + str(root_f) + ', com erro ' + str(error) + 'e com ' + str(iteration) + ' iteracoes.')
