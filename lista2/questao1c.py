@@ -2,6 +2,14 @@ import math;
 import numpy as np;
 import matplotlib.pyplot as plt;
 
+# função em questão que quero achar a raiz
+def f(x):
+    A = 27*x**3 + 27/2*x**4 + 9*x**5/4 + (x**6)/8
+    B = 3+x
+    Q = 20
+    g = 9.81
+    return (B)*Q**2 - g*(A)
+
 def falsePositive(f, lowerLimit, higherLimit, tol, iterationNumber=100):
     a = lowerLimit;
     b = higherLimit;
@@ -23,15 +31,6 @@ def falsePositive(f, lowerLimit, higherLimit, tol, iterationNumber=100):
         err = np.abs(f(x));
 
     return [x, err, i]
-    
-
-# função em questão que quero achar a raiz
-def f(x):
-    A = 27*x**3 + 27/2*x**4 + 9*x**5/4 + (x**6)/8
-    B = 3+x
-    Q = 20
-    g = 9.81
-    return (B)*Q**2 - g*(A)
 
 root_f, error, iteration = falsePositive(f, 0.1, 2.5, 0.01,10)
 

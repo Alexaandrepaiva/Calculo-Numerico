@@ -1,24 +1,25 @@
 #Feito por Alexandre Paiva
 #Library criada para disciplina de Cálculo Numérico
 
+import numpy as np
+import matplotlib.pyplot as plt
+
 def bissection(f, lowerLimit, higherLimit, tol, iterationNumber=100):
-    a = lowerLimit;
-    b = higherLimit;
-    err = b - a;
+    err = higherLimit - lowerLimit;
     i = 0;
 
     while (err > tol):
-        x = (a + b)/2;
+        x = (lowerLimit + higherLimit)/2;
         i = i + 1;
         
         if i >= iterationNumber:
             break;
 
-        if(f(x) * f(a) > 0):
-            a = x;
+        if(f(x) * f(lowerLimit) > 0):
+            lowerLimit = x;
 
         else:
-            b = x;
+            higherLimit = x;
         err = np.abs(f(x));
 
     return [x, err, i]

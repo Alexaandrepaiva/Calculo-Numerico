@@ -3,6 +3,14 @@ import matplotlib.pyplot as plt;
 import numpy as np;
 import math;
 
+# função em questão que quero achar a raiz
+def f(x):
+    return 2*x**3 - 11.7*x**2 + 17.7*x - 5;
+
+#função phi convergente
+def phi(x):
+    return 11.7/2 - 17.7/x/2 + 5/2*x**(-2);
+
 # função do método do ponto fixo
 def pontoFixo(f, phi, initialValue, tol, iterationNumber):
 
@@ -16,12 +24,6 @@ def pontoFixo(f, phi, initialValue, tol, iterationNumber):
         k += 1;
         
     return x_k;
-
-def f(x):
-    return 2*x**3 - 11.7*x**2 + 17.7*x - 5;
-
-def phi(x):
-    return 11.7/2 - 17.7/x/2 + 5/2*x**(-2);
 
 root_f = pontoFixo(f, phi, 3, 0.001, 3);
 print('A raiz de f vale ' + str(root_f[-1]));
