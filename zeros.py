@@ -3,7 +3,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-def graphically(x,y):
+def graphically(xGraph,yGraph):
     #Personalisar eixos
     plt.title('Questão 1a')
     plt.xlabel('X-Axis')
@@ -14,7 +14,7 @@ def graphically(x,y):
     ax.spines['left'].set_position('zero')
     ax.spines['bottom'].set_position('zero')
     #Mostrar o gráfico
-    plt.plot(x,y)
+    plt.plot(xGraph,yGraph)
     return plt.show()
 
 def bissection(f, lowerLimit, higherLimit, tol, iterationNumber=100):

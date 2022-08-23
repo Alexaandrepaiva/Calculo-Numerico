@@ -1,15 +1,9 @@
 import zeros
 import numpy as np
 
-def f(x):
-  return 2*x**3 - 11.7*x**2 + 17.7*x - 5;
+x = np.arange(0, 3, 0.01);
+A = 27*x**3 + 27/2*x**4 + 9*x**5/4 + (x**6)/8;
+B = 3+x;
+y = B*20**2 - 9.81*A;
 
-def phi(x):
-    return 11.7/2 - 17.7/x/2 + 5/2*x**(-2);
-
-def dfdx(x): 
-    return 6*x**1 - 23.4*x + 17.7;
-
-root_f = zeros.pontoFixo(f, phi, 3, 0.001, 3);
-print('\nLetra B)')
-print('A raiz de f pelo método do ponto fixo vale ' + str(root_f[-1]));
+graph = zeros.graphically(x,y)
