@@ -4,18 +4,13 @@ import numpy as np;
 import math;
 
 # função do método de Newton-Raphson
-
 def newton_raphson(f, dfdx, initialValue, tol, iterationNumber):
-
-    i = 0; # vai contar as iterações
-
-    x_k = [initialValue]; # array com os valores testados de x
-    y_k = [f(initialValue)]; # array com os correspondentes f(x)
+    i = 0;
+    x_k = [initialValue]; 
+    y_k = [f(initialValue)]; 
 
     while(abs(f(x_k[-1])) > tol or i > iterationNumber):
 
-        # método para calcular o próximo valor de x
-        # é onde a reta tangente em initialValue cruza as abcissas
         next_x = x_k[-1] - f(x_k[-1])/dfdx(x_k[-1]);
         
         x_k.append(next_x);
