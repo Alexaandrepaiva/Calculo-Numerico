@@ -1,14 +1,15 @@
 import zeros
+import numpy as np
 
 def f(x):
-    A = 27*x**3 + 27/2*x**4 + 9*x**5/4 + (x**6)/8
-    B = 3+x
-    Q = 20
-    g = 9.81
-    return (B)*Q**2 - g*(A)
+  return 2*x**3 - 11.7*x**2 + 17.7*x - 5;
 
-zeros.bissection(f, 0.5, 2.5, 0.01,10)
+def phi(x):
+    return 11.7/2 - 17.7/x/2 + 5/2*x**(-2);
 
-root_f, error, iteration = zeros.bissection(f, 0.5, 2.5, 0.01,10)
+def dfdx(x): 
+    return 6*x**1 - 23.4*x + 17.7;
 
-print('A raiz de f vale ' + str(root_f) + ', com erro ' + str(error) + 'e com ' + str(iteration) + ' iteracoes.')
+root_f = zeros.pontoFixo(f, phi, 3, 0.001, 3);
+print('\nLetra B)')
+print('A raiz de f pelo método do ponto fixo vale ' + str(root_f[-1]));

@@ -1,8 +1,21 @@
 #Feito por Alexandre Paiva
 #Biblioteca criada para disciplina de Cálculo Numérico
-
 import numpy as np
 import matplotlib.pyplot as plt
+
+def graphically(x,y):
+    #Personalisar eixos
+    plt.title('Questão 1a')
+    plt.xlabel('X-Axis')
+    plt.ylabel('Y-Axis')
+    ax = plt.gca()
+    ax.spines['top'].set_color('none')
+    ax.spines['right'].set_color('none')
+    ax.spines['left'].set_position('zero')
+    ax.spines['bottom'].set_position('zero')
+    #Mostrar o gráfico
+    plt.plot(x,y)
+    return plt.show()
 
 def bissection(f, lowerLimit, higherLimit, tol, iterationNumber=100):
     err = higherLimit - lowerLimit;
