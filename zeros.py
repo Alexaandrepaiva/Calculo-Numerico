@@ -4,7 +4,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def graphically(xGraph,yGraph):
-    #Personalisar eixos
     plt.title('Questão 1a')
     plt.xlabel('X-Axis')
     plt.ylabel('Y-Axis')
