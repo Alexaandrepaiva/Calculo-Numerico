@@ -32,7 +32,7 @@ def falsePositive(f, lowerLimit, higherLimit, tol, iterationNumber=100):
 
     return [x, err, i]
 
-root_f, error, iteration = falsePositive(f, 0.1, 2.5, 0.01,10)
+root_f, error, iteration = falsePositive(f, 0.5, 2.5, 0.01,10)
 
 # str(number) só transforma um número em string
 print('A raiz de f vale ' + str(root_f) + ', com erro ' + str(error) + 'e com ' + str(iteration) + ' iteracoes.')

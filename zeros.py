@@ -1,5 +1,5 @@
 #Feito por Alexandre Paiva
-#Library criada para disciplina de Cálculo Numérico
+#Biblioteca criada para disciplina de Cálculo Numérico
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -8,12 +8,9 @@ def bissection(f, lowerLimit, higherLimit, tol, iterationNumber=100):
     err = higherLimit - lowerLimit;
     i = 0;
 
-    while (err > tol):
+    while ((err > tol) and (i>= iterationNumber)):
         x = (lowerLimit + higherLimit)/2;
         i = i + 1;
-        
-        if i >= iterationNumber:
-            break;
 
         if(f(x) * f(lowerLimit) > 0):
             lowerLimit = x;
@@ -25,17 +22,17 @@ def bissection(f, lowerLimit, higherLimit, tol, iterationNumber=100):
     return [x, err, i]
 
 def pontoFixo(f, phi, initialValue, tol, iterationNumber):
-
     x_k = [initialValue]; 
-    k = 0; 
+    i = 0; 
 
-    while(abs(f(x_k[-1])) > tol and k < iterationNumber):
-
+    while(abs(f(x_k[-1])) > tol and i < iterationNumber):
         x_next = phi(x_k[-1]);
         x_k.append(x_next);
-        k += 1;
+        i += 1;
+    
+    err = x_next[-1] - x_next[-2]
         
-    return x_k;
+    return [x_k,err,i];
 
 def falsePositive(f, lowerLimit, higherLimit, tol, iterationNumber=100):
     a = lowerLimit;
