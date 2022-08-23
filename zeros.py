@@ -3,8 +3,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-
-def graphically(xGraph, yGraph):
+def graphically(x, y):
     plt.title('Questão 1a')
     plt.xlabel('X-Axis')
     plt.ylabel('Y-Axis')
@@ -13,8 +12,7 @@ def graphically(xGraph, yGraph):
     ax.spines['right'].set_color('none')
     ax.spines['left'].set_position('zero')
     ax.spines['bottom'].set_position('zero')
-    # Mostrar o gráfico
-    plt.plot(xGraph, yGraph)
+    plt.plot(x, y)
     plt.show()
 
 
