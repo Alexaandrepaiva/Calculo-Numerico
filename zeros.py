@@ -20,9 +20,10 @@ def bissection(f, lowerLimit = -1e5, higherLimit = 1e5, tolerance = 1e-5, iterat
     
     if f(lowerLimit)*f(higherLimit) > 0:
         return "Interval error"
+    
+    x = (lowerLimit + higherLimit)/2
 
     while (( abs(lowerLimit - higherLimit) > tolerance) and (i >= iterationNumber)):
-        x = (lowerLimit + higherLimit)/2
         i = i + 1
         if f(x) == 0:
             break
