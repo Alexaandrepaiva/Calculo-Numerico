@@ -57,10 +57,11 @@ def falsePositive(f, lowerLimit= -1e5, higherLimit = 1e5, tolerance = 1e-5, iter
 #Definidir phi(x)
 def fixedPoint(f, phi, initialValue, tolerance, iterationNumber):
     x_k = [initialValue]
+    x_next = []
     i = 0
     while(abs(f(x_k[-1])) > tolerance and i < iterationNumber):
-        x_next = phi(x_k[-1])
-        x_k.append(x_next)
+        x_next.append(phi(x_k[-1]))
+        x_k.append(x_next[-1])
         i += 1
     erro = x_next[-1] - x_next[-2]
     return [x_k, erro, i]
