@@ -1,7 +1,7 @@
 # Feito por Alexandre Paiva
 # Biblioteca criada para disciplina de Cálculo Numérico
-import matplotlib.pyplot as plt;
-import numpy as np;
+import matplotlib.pyplot as plt
+import numpy as np
 
 def graph(x, y):
     plt.xlabel('X-Axis')
@@ -17,61 +17,43 @@ def graph(x, y):
 
 def bissection(f, lowerLimit = -1e5, higherLimit = 1e5, tolerance = 1e-5, iterationNumber = 1e5):
     i = 0
-    
-    if f(lowerLimit)*f(higherLimit) > 0:
-        return "Interval error"
-    
-    x = (lowerLimit + higherLimit)/2
-
-    while (( abs(lowerLimit - higherLimit) > tolerance) and (i >= iterationNumber)):
+    while (higherLimit - lowerLimit) > tolerance and i < iterationNumber:
+        x = (lowerLimit + higherLimit)/2
         i = i + 1
-        if f(x) == 0:
-            break
-        elif(f(x) * f(lowerLimit) > 0):
+        if f(x) * f(lowerLimit) > 0:
             lowerLimit = x
+            erro = (higherLimit - x)/2
         else:
             higherLimit = x
+            erro = (x - lowerLimit)/2
+    return [x, erro, i]
+#raiz, erro, iteracoes = zeros.bissection(f, 0.5, 2.5, 0.01, 10)
+#print('A raiz de f pelo método da bisseção vale {:.7f} , com erro {:.5f} e com {} iteracoes.'.format(raiz, erro, iteracoes))
 
-    return [x, abs(lowerLimit - higherLimit), i]
+def falsePositive(f, lowerLimit= -1e5, higherLimit = 1e5, tolerance = 1e-5, iterationNumber = 1e5):
+    i = 0
+    while (higherLimit - lowerLimit) > tolerance and i < iterationNumber:
+        x = (lowerLimit * abs(f(higherLimit)) + higherLimit * abs(f(lowerLimit)))/(abs(f(lowerLimit)) + abs(f(higherLimit)))
+        i = i + 1
+        if f(x) * f(lowerLimit) > 0:
+            lowerLimit = x
+            erro = (higherLimit - x)/2
+        else:
+            higherLimit = x
+            erro = (x - lowerLimit)/2
+    return [x, erro, i]
+#raiz, erro, iteracoes = zeros.falsePositive(f, 0.5, 2.5, 0.01, 10)
+#print('A raiz de f pelo método do falsovale {:.7f} , com erro {:.5f} e com {} iteracoes.'.format(raiz, erro, iteracoes))
 
-
-def pontoFixo(f, phi, initialValue, tolerance, iterationNumber):
+def fixedPoint(f, phi, initialValue, tolerance, iterationNumber):
     x_k = [initialValue]
     i = 0
-
     while(abs(f(x_k[-1])) > tolerance and i < iterationNumber):
         x_next = phi(x_k[-1])
         x_k.append(x_next)
         i += 1
-
-    err = x_next[-1] - x_next[-2]
-
-    return [x_k, err, i]
-
-
-def falsePositive(f, lowerLimit, higherLimit, tolerance, iterationNumber=100):
-    a = lowerLimit
-    b = higherLimit
-    err = b - a
-    i = 0
-
-    while (err > tolerance):
-        # calcula x como a média ponderada
-        # de resto, idêntico à bisseção
-        x = (a * abs(f(b)) + b * abs(f(a)))/(abs(f(a)) + abs(f(b)))
-        i = i + 1
-
-        if i >= iterationNumber:
-            break
-
-        if(f(x) * f(a) > 0):
-            a = x
-
-        else:
-            b = x
-        err = b - a
-
-    return [x, err, i]
+    erro = x_next[-1] - x_next[-2]
+    return [x_k, erro, i]
 
 
 def newton_raphson(f, dfdx, initialValue, tolerance, iterationNumber):
