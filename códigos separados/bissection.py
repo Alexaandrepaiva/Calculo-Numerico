@@ -3,32 +3,21 @@ import matplotlib.pyplot as plt;
 import numpy as np;
 import math;
 
-def bissection(f, lowerLimit, higherLimit, tol, iterationNumber=100):
-    a = lowerLimit;
-    b = higherLimit;
-    err = b - a;
-    i = 0;
-
-    while (err > tol):
-        x = (a + b)/2;
-        i = i + 1;
-        
-        if i >= iterationNumber:
-            break;
-
-        if(f(x) * f(a) > 0):
-            a = x;
-
-        else:
-            b = x;
-        err = np.abs(f(x));
-
-    return [x, err, i]
-
-# função em questão que quero achar a raiz
 def f(x):
-    return 
+    return
 
-root_f, error, iteration = bissection(f, 0.5, 2.5, 0.01,10)
+def bissection(f, lowerLimit = -1e5, higherLimit = 1e5, tolerance = 1e-5, iterationNumber = 1e5):
+    i = 0
+    while (higherLimit - lowerLimit) > tolerance and i < iterationNumber:
+        x = (lowerLimit + higherLimit)/2
+        i = i + 1
+        if f(x) * f(lowerLimit) > 0:
+            lowerLimit = x
+            erro = (higherLimit - x)/2
+        else:
+            higherLimit = x
+            erro = (x - lowerLimit)/2
+    return [x, erro, i]
 
-print('A raiz de f vale ' + str(root_f) + ', com erro ' + str(error) + 'e com ' + str(iteration) + ' iteracoes.')
+raiz, erro, iteracoes = bissection(f, 0.5, 2.5, 0.01, 10)
+print('A raiz de f pelo método da bisseção vale {:.7f} , com erro {:.5f} e com {} iteracoes.'.format(raiz, erro, iteracoes))

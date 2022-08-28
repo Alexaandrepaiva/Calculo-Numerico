@@ -3,36 +3,21 @@ import matplotlib.pyplot as plt;
 import numpy as np;
 import math;
 
-# função do método da falsa posição
+def f(x):
+    return
 
-def falsePositive(f, lowerLimit, higherLimit, tol, iterationNumber=100):
-    a = lowerLimit;
-    b = higherLimit;
-    err = b - a;
-    i = 0;
-
-    while (err > tol):
-        # calcula x como a média ponderada
-        # de resto, idêntico à bisseção
-        x = (a * abs(f(b)) + b * abs(f(a)))/(abs(f(a)) + abs(f(b)));
-        i = i + 1;
-        
-        if i >= iterationNumber:
-            break;
-
-        if(f(x) * f(a) > 0):
-            a = x;
-
+def falsePositive(f, lowerLimit= -1e5, higherLimit = 1e5, tolerance = 1e-5, iterationNumber = 1e5):
+    i = 0
+    while (higherLimit - lowerLimit) > tolerance and i < iterationNumber:
+        x = (lowerLimit * abs(f(higherLimit)) + higherLimit * abs(f(lowerLimit)))/(abs(f(lowerLimit)) + abs(f(higherLimit)))
+        i = i + 1
+        if f(x) * f(lowerLimit) > 0:
+            lowerLimit = x
+            erro = (higherLimit - x)/2
         else:
-            b = x;
-        err = b - a;
+            higherLimit = x
+            erro = (x - lowerLimit)/2
+    return [x, erro, i]
 
-    return [x, err, i]
-
-# função em questão que quero achar a raiz
-def f(x): 
-    return 
-
-root_f, error, iteration = falsePositive(f, 0.1, 2.5, 0.01,10)
-
-print('A raiz de f vale ' + str(root_f) + ', com erro ' + str(error) + 'e com ' + str(iteration) + ' iteracoes.')
+raiz, erro, iteracoes = falsePositive(f, 0.5, 2.5, 0.01, 10)
+print('A raiz de f pelo método do falsovale {:.7f} , com erro {:.5f} e com {} iteracoes.'.format(raiz, erro, iteracoes))
