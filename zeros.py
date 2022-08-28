@@ -55,23 +55,20 @@ def falsePositive(f, lowerLimit= -1e5, higherLimit = 1e5, tolerance = 1e-5, iter
 
 #Definir f(x)
 #Definidir phi(x)
-def fixedPoint(f, phi, initialValue, tolerance, iterationNumber):
-    x_k = [initialValue]
-    x_next = []
+def fixedPoint(f, phi, initialValue = 0, tolerance = 1e-5, iterationNumber = 1e5):
     i = 0
-    while(abs(f(x_k[-1])) > tolerance and i < iterationNumber):
-        x_next.append(phi(x_k[-1]))
-        x_k.append(x_next[-1])
+    x = phi(initialValue)
+    while(abs( initialValue - x) > tolerance and i < iterationNumber):
         i += 1
-    erro = x_next[-1] - x_next[-2]
-    return [x_k, erro, i]
+        initialValue, x = x, phi(x)
+    return [x, i]
 #raiz, erro, iteracoes = zeros.fixedPoint(f, phi, -1, 0.001, 10)
-#print('A raiz de f pelo método do ponto fixo é {:.7f} , com erro {:.5f} e com {} iteracoes.'.format(raiz, erro, iteracoes))
+#print('A raiz de f pelo método da iteração de ponto fixo é {:.7f} e com {} iteracoes.'.format(raiz, iteracoes))
 
 
 #Definir f(x)
 #Definir dfdx(x)
-def newtonRaphson(f, dfdx, initialValue, tolerance, iterationNumber):
+def newtonRaphson(f, dfdx, initialValue = 0, tolerance = 1e-5, iterationNumber = 1e5):
     i = 0
     x_k = [initialValue]
     y_k = [f(initialValue)]
@@ -82,7 +79,7 @@ def newtonRaphson(f, dfdx, initialValue, tolerance, iterationNumber):
         y_k.append(f(next_x))
     return [x_k[-1],i]
 #raiz, iteracoes = zeros.newtonRaphson(f, dfdx, 2, 0.001, 10)
-#print('A raiz de f pelo método do ponto fixo é {:.7f}  e com {} iteracoes.'.format(raiz, iteracoes))
+#print('A raiz de f pelo método de Newton-Raphson é {:.7f}  e com {} iteracoes.'.format(raiz, iteracoes))
 
 
 #Definir f(x)
@@ -95,4 +92,4 @@ def secant(f, lowerLimit = -1e3, higherLimit=1e3, minValue=1e-8, iterationNumber
         higherLimit = var
     return [lowerLimit, i]
 #raiz, iteracoes = zeros.secant(f, 1, 2, 0.001, 100)
-#print('A raiz de f pelo método d secante é {:.7f}  e com {} iteracoes.'.format(raiz, iteracoes))
+#print('A raiz de f pelo método da secante é {:.7f}  e com {} iteracoes.'.format(raiz, iteracoes))
