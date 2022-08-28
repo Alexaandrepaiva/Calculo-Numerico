@@ -8,17 +8,15 @@ Esse repositório foi feito pelo aluno Alexandre de Paiva Almeida para ser impor
 
 Caso você também queira usar esse repositório, basta seguir os seguintes passos:
 
-- Para clonar esse repositório no seu arquivo colab, copie e cole o código abaixo:
+1. Para clonar esse repositório no seu arquivo colab, copie e cole o código abaixo:
 
 ```
 %rm -r CalculoNumerico/
 !git clone https://github.com/Alexaandrepaiva/CalculoNumerico
 ```
 
-- Para importar arquivos, importe um ou mais arquivo da seguinte maneira:
+2. Para importar arquivos, importe um ou mais arquivo da seguinte maneira:
 
 ```
 from CalculoNumerico import linearSystem as ls
 ```
-
-
