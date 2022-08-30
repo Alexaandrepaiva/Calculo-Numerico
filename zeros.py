@@ -27,7 +27,7 @@ def bissection(f, lowerLimit = -1e5, higherLimit = 1e5, tolerance = 1e-5, iterat
         i = i + 1
         if f(x) * f(lowerLimit) > 0:
             lowerLimit = x
-            erro_absoluto = higherLimit - x
+            erro_absoluto_absoluto = higherLimit - x
             erro_relativo = (higherLimit - x)/higherLimit
         else:
             higherLimit = x
@@ -35,7 +35,7 @@ def bissection(f, lowerLimit = -1e5, higherLimit = 1e5, tolerance = 1e-5, iterat
             erro_relativo = (higherLimit - x)/higherLimit
     return [x, erro_absoluto, erro_relativo, i]
 #raiz, erro_absoluto, erro_relativo, iteracoes = zeros.bissection(f, 0.5, 2.5, 0.01, 10)
-#print('A raiz de f pelo método da bisseção vale {:.7f} , com erro_absoluto {:.5f}, erro relativo {:.5f}e com {} iteracoes.'.format(raiz, erro_absoluto, erro_relativo, iteracoes))
+#print('A raiz de f pelo método da bisseção vale {:.7f} , com erro absoluto {:.5f}, erro relativo {:.5f}e com {} iteracoes.'.format(raiz, erro_absoluto, erro_relativo, iteracoes))
 
 
 #Definir f(x)
@@ -46,13 +46,13 @@ def falsePositive(f, lowerLimit= -1e5, higherLimit = 1e5, tolerance = 1e-5, iter
         i = i + 1
         if f(x) * f(lowerLimit) > 0:
             lowerLimit = x
-            erro = (higherLimit - x)/2
+            erro_absoluto = higherLimit - x
         else:
             higherLimit = x
-            erro = (x - lowerLimit)/2
-    return [x, erro, i]
-#raiz, erro, iteracoes = zeros.falsePositive(f, 0.5, 2.5, 0.01, 10)
-#print('A raiz de f pelo método do falsovale {:.7f} , com erro {:.5f} e com {} iteracoes.'.format(raiz, erro, iteracoes))
+            erro_absoluto = x - lowerLimit
+    return [x, erro_absoluto, i]
+#raiz, erro_absoluto, iteracoes = zeros.falsePositive(f, 0.5, 2.5, 0.01, 10)
+#print('A raiz de f pelo método do falsovale {:.7f} , com erro absoluto {:.5f} e com {} iteracoes.'.format(raiz, erro_absoluto, iteracoes))
 
 
 #Definir f(x)
@@ -77,12 +77,15 @@ def newtonRaphson(f, dfdx, initialValue = 0, tolerance = 1e-5, iterationNumber =
     y_k = [f(initialValue)]
     while abs( f(x_k[-1]) ) > tolerance and i < iterationNumber:
         i = i + 1
+        old_x = x_k[-1]
         next_x = x_k[-1] - f(x_k[-1])/dfdx(x_k[-1])
+        erro_absoluto = abs(old_x - next_x)
+        erro_relativo = abs(old_x - next_x)/old_x
         x_k.append(next_x)
         y_k.append(f(next_x))
-    return [x_k[-1],i]
-#raiz, iteracoes = zeros.newtonRaphson(f, dfdx, 2, 0.001, 10)
-#print('A raiz de f pelo método de Newton-Raphson é {:.7f}  e com {} iteracoes.'.format(raiz, iteracoes))
+    return [x_k[-1], erro_absoluto, erro_relativo, i]
+#raiz, erro_absoluto, erro_relativo, iteracoes = zeros.newtonRaphson(f, dfdx, 2, 0.001, 10)
+#print('A raiz de f pelo método de Newton-Raphson é {:.7f}, com erro absoluto {}, erro relativo {} e com {} iteracoes.'.format(raiz, erro_absoluto, erro_relativo, iteracoes))
 
 
 #Definir f(x)
