@@ -32,7 +32,7 @@ def det(matrix):
 
 # Substituicao Sucessiva - Resolve L*x = b_s. 
 # Recebe L (triangular inferior), B e retona x
-def sucessiveReplacement(L, b_s):
+def substSucessiva(L, b_s):
     n=b_s.size
     xs=np.zeros(n)
     for i in range(n):
@@ -41,14 +41,14 @@ def sucessiveReplacement(L, b_s):
 
 # Substituicao retroativa - Resolve U*x = b_s. 
 # Recebe U (triangular superior), B e retona x
-def retroactiveReplacement(matrixU, b_s):
+def substRetroativa(matrixU, b_s):
     n = b_s.size
     x_s = np.zeros(n)
     for i in reversed(range(n)):
         x_s[i] = (b_s[i] - matrixU[i, i+1:]@x_s[i+1:])/matrixU[i, i]
     return x_s
 
-#Eliminação de Gauss
+#Eliminação de Gauss pura
 def gauss(table):
     table_np = np.array(table)
     n_lines = len(table_np)
@@ -87,8 +87,21 @@ def gauss(table):
     next_roots.reverse()
     return next_roots
 
+#Eliminação de Gauss
+def gaussElimination(matrix_A, matrix_b):
+  a = np.copy(matrix_A)
+  bs = np.copy(matrix_b)
+  n = bs.size
+  for j in range(n-1):
+    for i in range(j+1,n):
+        m = a[i,j] / a[j,j]
+        a[i,j:] -= m*a[j,j:]
+        bs[i] -= m*bs[j]
+  matrix_x = substRetroativa(a,bs)
+  return matrix_x
+
 # Eliminacao de Gauss com pivotamento.- Resolve A*x = B. 
-# Recebe A, B, escalona-os e depois resolve usando a funcao retroactiveReplacement() e retorna x
+# Recebe A, B, escalona-os e depois resolve usando a funcao substRetroativa() e retorna x
 def gaussEliminationPivot(inA, inb):
     A = np.copy(inA)
     bs = np.copy(inb)
@@ -102,7 +115,7 @@ def gaussEliminationPivot(inA, inb):
             m = A[i, j]/A[j, j]
             A[i, j:] -= m*A[j, j:]
             bs[i] -= m*bs[j]
-    xs = retroactiveReplacement(A, bs)
+    xs = substRetroativa(A, bs)
     return xs
 
 # Metodo do gradiente conjugado - Resolve A*x = B
@@ -224,7 +237,7 @@ def sol_gaussseidel(A, b, x0, kmax):
     M = np.tril(A)
     for k in range(kmax):
         r = b - A@x0
-        h = sucessiveReplacement(M, r)
+        h = substSucessiva(M, r)
         if np.linalg.norm(h) < 1e-16 + 1e-16*np.linalg.norm(x0):
             break
         x0 += h
@@ -277,8 +290,8 @@ def newton_modf(f, x, kmax=100, tau=1.0e-10, tau1=1.0e-10, tau2=1.0e-10):
     for k in range(kmax):
      # solução do (LU)dx=-fk
         fk = f(x)
-        dy = sucessiveReplacement(L, -fk)
-        dx = retroactiveReplacement(U, dy)
+        dy = substSucessiva(L, -fk)
+        dx = substRetroativa(U, dy)
         x += dx
         if np.linalg.norm(dx) < tau + tau1*np.linalg.norm(x):
             return x
