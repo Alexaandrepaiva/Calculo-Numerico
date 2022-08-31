@@ -3,6 +3,8 @@
 
 import numpy as np
 
+# Determiante - Calcula o determinante de uma matriz
+# Recebe matrix e retorna seu determinante
 def det(matrix):
     matrix_np = np.array(matrix)
     row_number = len(matrix_np)
@@ -28,7 +30,7 @@ def det(matrix):
     return matrix_np[row_number-1][row_number-1]
 
 # Substituicao Sucessiva - Resolve L*x = b_s. 
-# # Recebe L (triangular inferior), B e retona x
+# Recebe L (triangular inferior), B e retona x
 def sucessiveReplacement(L, b_s):
     n=b_s.size
     xs=np.zeros(n)
@@ -105,4 +107,37 @@ def decompositionLU(matrix_A):
             U[i,j:] -= m*U[j,j:]
             L[i,j] = m
     return L, U
+
+# Decompoe matrix_A em LDL^T
+# Recebe matrix_A e retorna L, D e L^T juntos na mesma matriz
+def LDLT(matrix_A):
+    a = matrix_A.copy()
+    n=len(a)
+    for k in range(n-1):#resolve o sistem Lv=A
+        for i in range(k+1,n):
+            m=a[i,k]/a[k,k]
+            a[i,k+1:n] = a[i,k+1:n] - m*a[k,k+1:n]
+            a[i,k]=m
+        for i in range(k+1,n):
+            a[k,i]=a[i,k]
+    #for j in range(n):  
+        #a[j,j+1:n] = a[j,j+1:n]/a[j,j]
+    return a
+
+# Fatora uma matriz simetrica, definida e positiva (x^T*A*x > 0) como A = LL^T
+# Recebe A e retorna L
+def choleski(A):
+    L = A.copy()
+    n = len(A)
+    for k in range(n):
+        try:
+            L[k, k] = math.sqrt(L[k, k] - L[k, 0:k]@L[k, 0:k])
+        except ValueError:
+            print('matriz não é definita e positiva')
+        for i in range(k+1, n):
+            L[i, k] = (L[i, k] - L[i, 0:k]@L[k, 0:k])/L[k, k]
+    for k in range(1, n):
+        L[0:k, k] = 0.0
+    return L
+
     
