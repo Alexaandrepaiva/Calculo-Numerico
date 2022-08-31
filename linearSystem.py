@@ -27,6 +27,15 @@ def det(matrix):
 
     return matrix_np[row_number-1][row_number-1]
 
+# Substituicao Sucessiva - Resolve L*x = b_s. 
+# # Recebe L (triangular inferior), B e retona x
+def sucessiveReplacement(L, b_s):
+    n=b_s.size
+    xs=np.zeros(n)
+    for i in range(n):
+        xs[i] = (b_s[i] -L[i,:i]@xs[:i])/L[i,i]
+    return xs
+
 # Substituicao retroativa - Resolve U*x = b_s. 
 # Recebe U (triangular superior), B e retona x
 def retroactiveReplacement(matrixU, b_s):
@@ -53,4 +62,47 @@ def gaussEliminationPivot(inA, inb):
             bs[i] -= m*bs[j]
     xs = retroactiveReplacement(A, bs)
     return xs
+
+# Metodo do gradiente conjugado - Resolve A*x = B
+# Recebe A, B e o valor inicial x0 e retona x
+def linearConjugateGradient(A, b, x0, tol=1e-5):
+    xk = x0
+    rk = np.dot(A, xk) - b
+    pk = -rk
+    rk_norm = np.linalg.norm(rk)
+
+    num_iter = 0
+    curve_x = [xk]
+    while rk_norm > tol:
+        apk = np.dot(A, pk)
+        rkrk = np.dot(rk, rk)
+
+        alpha = rkrk / np.dot(pk, apk)
+        xk = xk + alpha * pk
+        rk = rk + alpha * apk
+        beta = np.dot(rk, rk) / rkrk
+        pk = -rk + beta * pk
+
+        num_iter += 1
+        curve_x.append(xk)
+        rk_norm = np.linalg.norm(rk)
+        print('Iteration: {} \t x = {} \t residual = {:.4f}'.
+              format(num_iter, xk, rk_norm))
+
+    print('\nSolution: \t x = {}'.format(xk))
+
+    return np.array(curve_x)
+
+#Decomposição LU - decompoõe uma matriz 
+#Recebe A e retorna L e U
+def decompositionLU(matrix_A):
+    n = matrix_A.shape[0]
+    U = np.copy(matrix_A)
+    L = np.identity(n)
+    for j in range(n-1):
+        for i in range(j+1,n):
+            m = U[i,j]/U[j,j]
+            U[i,j:] -= m*U[j,j:]
+            L[i,j] = m
+    return L, U
     
