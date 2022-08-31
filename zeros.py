@@ -1,5 +1,5 @@
 # Feito por Alexandre Paiva
-# Biblioteca criada para disciplina de Cálculo Numérico
+# Biblioteca de zero de funções criada para disciplina de Cálculo Numérico
 import matplotlib.pyplot as plt
 import numpy as np
 
