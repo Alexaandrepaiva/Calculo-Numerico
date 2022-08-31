@@ -27,4 +27,30 @@ def det(matrix):
 
     return matrix_np[row_number-1][row_number-1]
 
+# Substituicao retroativa - Resolve U*x = b_s. 
+# Recebe U (triangular superior), B e retona x
+def retroactiveReplacement(matrixU, b_s):
+    n = b_s.size
+    x_s = np.zeros(n)
+    for i in reversed(range(n)):
+        x_s[i] = (b_s[i] - matrixU[i, i+1:]@x_s[i+1:])/matrixU[i, i]
+    return x_s
+
+# Eliminacao de Gauss com pivotamento.- Resolve A*x = B. 
+# Recebe A, B, escalona-os e depois resolve usando a funcao retroactiveReplacement() e retorna x
+def gaussEliminationPivot(inA, inb):
+    A = np.copy(inA)
+    bs = np.copy(inb)
+    n = bs.size
+    for j in range(n-1):
+        k = np.argmax(np.abs(A[j:, j])) + j
+        if k != j:
+            A[j, :], A[k, :] = A[k, :], A[j, :].copy()
+            bs[j], bs[k] = bs[k], bs[j]
+        for i in range(j+1, n):
+            m = A[i, j]/A[j, j]
+            A[i, j:] -= m*A[j, j:]
+            bs[i] -= m*bs[j]
+    xs = retroactiveReplacement(A, bs)
+    return xs
     
