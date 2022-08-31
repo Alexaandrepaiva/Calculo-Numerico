@@ -220,6 +220,35 @@ def Sistema_Nao_L_Newton(f, x, tol=1.0e-9, kmax=100):
     return x
 
 
-
+def newton_modf(f, x, kmax=100, tau=1.0e-10, tau1=1.0e-10, tau2=1.0e-10):
+    def jacobiana(f, x):
+        h = 1.0e-4
+        n = len(x)
+        J = np.zeros((n, n))
+        f0 = f(x)
+        for i in range(n):
+            x_original = x[i]
+            x[i] = x_original + h
+            f1 = f(x)
+            x[i] = x_original
+            J[:, i] = (f1-f0)/h
+        return J, f0
+    J, f0 = jacobiana(f, x)
+    L, U = decompositionLU(J)
+    for k in range(kmax):
+     # solução do (LU)dx=-fk
+        fk = f(x)
+        dy = sucessiveReplacement(L, -fk)
+        dx = retroactiveReplacement(U, dy)
+        x += dx
+        if np.linalg.norm(dx) < tau + tau1*np.linalg.norm(x):
+            return x
+        fk_velho = np.copy(fk)
+        f_k_novo = f(x)  # f_{k+1}
+        if np.linalg.norm(f_k_novo) >= tau2*np.linalg.norm(fk_velho):
+            J, f0 = jacobiana(f, x)
+            L, U = decompositionLU(J)
+    print('não convergiu')
+    return x
 
     
