@@ -3,17 +3,17 @@ import matplotlib.pyplot as plt;
 import numpy as np;
 import math;
 
-# função do método secante
-def secant(f, lowerLimit=-1e3, higherLimit=1e3,minValue = 1e-8, iterationNumber=10000):
-    i = 0 
-    c1 = lowerLimit
-    c0 = higherLimit
-    for i in range(iterationNumber):
-        var = c1
-        c1 = c1 - f(c1)*(c1-c0)/(f(c1)-f(c0))
-        c0 = var
+def f(x):
+    return
 
-        if abs(f(c1)) < minValue:
-            break
+def secant(f, lowerLimit = -1e3, higherLimit=1e3, minValue=1e-8, iterationNumber=10000):
+    i = 0
+    while abs( f(lowerLimit) ) > minValue and i < iterationNumber:
+        i = i + 1
+        var = lowerLimit
+        lowerLimit = lowerLimit - f(lowerLimit)*(lowerLimit-higherLimit)/(f(lowerLimit)-f(higherLimit))
+        higherLimit = var
+    return [lowerLimit, i]
 
-    return [c1,i]
+raiz, iteracoes = secant(f, 1, 2, 0.001, 100)
+print('A raiz de f pelo método da secante é {:.7f}  e com {} iteracoes.'.format(raiz, iteracoes))
