@@ -2,6 +2,7 @@
 # Biblioteca de sistemas lineares criada para disciplina de Cálculo Numérico
 
 import numpy as np
+import math
 
 # Determiante - Calcula o determinante de uma matriz
 # Recebe matrix e retorna seu determinante
@@ -139,5 +140,86 @@ def choleski(A):
     for k in range(1, n):
         L[0:k, k] = 0.0
     return L
+
+# Resolve LL^T*X = B
+# Recebe L e B e retorna x
+def Sol_choleski(L, b):
+    n = len(b)
+    x = np.zeros((n))
+    y = np.zeros((n))
+    # Solução de [L]{y} = {b}
+    for k in range(n):
+        y[k] = (b[k] - L[k, 0:k]@y[0:k])/L[k, k]
+    # Solução [L_T]{x} = {y}
+    for k in range(n-1, -1, -1):
+        x[k] = (y[k] - L[k+1:n, k]@x[k+1:n])/L[k, k]
+    return x
+
+def Sol_Sist_Trid(c,d,e,b):
+  n=len(d)
+  k=np.ones((n))
+  t=np.ones((n))
+  x =np.ones((n))
+  for i in range(n):
+    dem=d[i] - c[i]*t[i-1]
+    k[i] =(b[i] -c[i]*k[i-1])/dem
+    t[i]=e[i]/dem
+  x[n-1]=k[n-1]
+  for i in reversed(range(n-1)):
+    x[i]=k[i] - t[i]*x[i+1]
+  return x  
+
+def sol_jacobi(A, b, x0, kmax=100):
+    """"""
+    d = np.diag(A)
+    for k in range(kmax):
+        r = b - A@x0
+        h = r/d
+        if np.linalg.norm(h) < 1e-16 + 1e-16*np.linalg.norm(x0):
+            return x0
+        x0 += h
+    return x0
+
+
+def sol_gaussseidel(A, b, x0, kmax):
+    M = np.tril(A)
+    for k in range(kmax):
+        r = b - A@x0
+        h = sucessiveReplacement(M, r)
+        if np.linalg.norm(h) < 1e-16 + 1e-16*np.linalg.norm(x0):
+            break
+        x0 += h
+    return x0
+
+
+def Sistema_Nao_L_Newton(f, x, tol=1.0e-9, kmax=100):
+    def jacobiana(f, x):
+        h = 1.0e-4
+        n = len(x)
+        J = np.zeros((n, n))
+        f0 = f(x)
+        for i in range(n):
+            x_original = x[i]
+            x[i] = x_original + h
+            f1 = f(x)
+            x[i] = x_original
+            J[:, i] = (f1-f0)/h
+        return J, f0
+    for k in range(kmax):
+        J, f0 = jacobiana(f, x)
+        if np.linalg.norm(f0)/len(x) < tol:
+            return x
+        dx = gaussEliminationPivot(J, -f0)
+        x = x + dx
+        if np.linalg.norm(dx) < tol*max(max(abs(x)), 1.0):
+            # return x
+            break
+    print('não convergiu')
+    # else:
+    #     x = None
+    return x
+
+
+
 
     
