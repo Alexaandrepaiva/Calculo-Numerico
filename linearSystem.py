@@ -46,13 +46,13 @@ def substSucessiva(L, b_s):
         xs[i] = (b_s[i] -L[i,:i]@xs[:i])/L[i,i]
     return xs
 
-# Substituicao retroativa - Resolve U*x = b_s. 
+# Substituicao retroativa - Resolve U*x = b. 
 # Recebe U (triangular superior), B e retona x
-def substRetroativa(matrixU, b_s):
-    n = b_s.size
+def substRetroativa(matrix_U, matrix_b):
+    n = matrix_b.size
     x_s = np.zeros(n)
     for i in reversed(range(n)):
-        x_s[i] = (b_s[i] - matrixU[i, i+1:]@x_s[i+1:])/matrixU[i, i]
+        x_s[i] = (matrix_b[i] - matrix_U[i, i+1:]@x_s[i+1:])/matrix_U[i, i]
     return x_s
 
 #Eliminação de Gauss eng
