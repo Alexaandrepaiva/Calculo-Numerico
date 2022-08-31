@@ -30,6 +30,13 @@ def det(matrix):
 
     return matrix_np[row_number-1][row_number-1]
 
+def findRow(A, n):
+    ans = -1
+    for i in range(n+1, len(A)):
+        if(A[i, n] != 0):
+            ans = i
+    return ans
+
 # Substituicao Sucessiva - Resolve L*x = b_s. 
 # Recebe L (triangular inferior), B e retona x
 def substSucessiva(L, b_s):
@@ -48,8 +55,8 @@ def substRetroativa(matrixU, b_s):
         x_s[i] = (b_s[i] - matrixU[i, i+1:]@x_s[i+1:])/matrixU[i, i]
     return x_s
 
-#Eliminação de Gauss pura
-def gauss(table):
+#Eliminação de Gauss eng
+def gaussEng(table):
     table_np = np.array(table)
     n_lines = len(table_np)
     n_colum = len(table_np[0])
@@ -86,6 +93,30 @@ def gauss(table):
         next_roots.append(root)
     next_roots.reverse()
     return next_roots
+
+#Eliminação de Gauss bigo
+def gaussBigo(A, b):
+    for i in range(0, len(A)):
+        # pivots in case of 0 in main diagonal
+        if(A[i, i] == 0):
+            n = findRow(A, i)
+            if(n == -1):
+                print("det(A) = 0")
+                break
+            else:
+                temp = A[i]
+                A[i] = A[n]
+                A[n] = temp
+                temp = b[i]
+                b[i] = b[n]
+                b[n] = temp
+        
+        for j in range(1+i, len(A)):
+            r = A[j, i]/A[i, i]
+            b[j] -= r*b[i]
+            for k in range(i, len(A)):
+                A[j, k] -= r*A[i, k]
+    return A, b
 
 #Eliminação de Gauss
 def gaussElimination(matrix_A, matrix_b):
