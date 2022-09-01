@@ -62,7 +62,7 @@ def gaussEng(table):
     n_colum = len(table_np[0])
 
     if n_lines+1!=n_colum:
-        exit("We can't solve this... Please make sure this is right.")
+        exit("Sistema sem solução")
 
     for i in range(n_lines):
         if table_np[i][i] !=0:
