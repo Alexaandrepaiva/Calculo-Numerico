@@ -44,6 +44,9 @@ Nesse método, decompomos a matriz A em um produto de matrizes L (triangular inf
 - Matriz pentadiagonal
 
 ### Métodos iterativos
+Nos métodos iterativos, para a resolução do sistema linear Ax = b, dado na forma matricial, tranformamos esse sitema linear na forma equivalente x = Cx + g.
+#### Método Gauss-Jacobi
+#### Método Gauss-Seidel
 
 ## Autovalores e Autovetores
 ## Interpolação Polinomial

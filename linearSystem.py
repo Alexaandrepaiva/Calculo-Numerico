@@ -283,7 +283,6 @@ def pentadiagonal(a,c,d,e,f,b):
   return x
 
 def solutionJacobi(A, b, x0, kmax=100):
-    """"""
     d = np.diag(A)
     for k in range(kmax):
         r = b - A@x0
@@ -294,7 +293,7 @@ def solutionJacobi(A, b, x0, kmax=100):
     return x0
 
 
-def solutionGaussSeidel(A, b, x0, kmax):
+def solutionGaussSeidel(A, b, x0, kmax=100):
     M = np.tril(A)
     for k in range(kmax):
         r = b - A@x0
@@ -333,7 +332,7 @@ def nonLinearNewton(f, x, tol=1.0e-9, kmax=100):
     return x
 
 
-def newton_modf(f, x, kmax=100, tau=1.0e-10, tau1=1.0e-10, tau2=1.0e-10):
+def newtonModified(f, x, kmax=100, tau=1.0e-10, tau1=1.0e-10, tau2=1.0e-10):
     def jacobiana(f, x):
         h = 1.0e-4
         n = len(x)
