@@ -21,5 +21,8 @@ Caso você também queira usar esse repositório, basta seguir os seguintes pass
 from CalculoNumerico import zeros
 from CalculoNumerico import linearSystem as ls
 from CalculoNumerico import polinomios as pl
-from CalculoNu
+from CalculoNumerico import autovalores as av
 ```
+
+## Zeros de funções
+## Sistemas Lineares
