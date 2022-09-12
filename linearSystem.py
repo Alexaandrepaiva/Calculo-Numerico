@@ -1,6 +1,7 @@
 # Feito por Alexandre Paiva
 # Biblioteca de sistemas lineares criada para disciplina de Cálculo Numérico
 
+# Em algumas funções, talvez tenha-se que que importar as seguintes bibliotecas
 import numpy as np
 import math
 
@@ -38,7 +39,7 @@ def findRow(A, n):
     return ans
 
 # Substituicao Sucessiva - Resolve L*x = b_s. 
-# Recebe L (triangular inferior), B e retona x
+# Recebe L (triangular inferior), b e retona x
 def substSucessiva(L, b_s):
     n=b_s.size
     xs=np.zeros(n)
@@ -47,7 +48,7 @@ def substSucessiva(L, b_s):
     return xs
 
 # Substituicao retroativa - Resolve U*x = b. 
-# Recebe U (triangular superior), B e retona x
+# Recebe U (triangular superior), b e retona x
 def substRetroativa(matrix_U, matrix_b):
     n = matrix_b.size
     x_s = np.zeros(n)
@@ -199,8 +200,8 @@ def solutionLU(matrix_A,matrix_b):
   return xs
 
 # Decompoe matrix_A em LDL^T
-# Recebe matrix_A e retorna L, D e L^T juntos na mesma matriz
-def LDLT(matrix_A):
+# Recebe matrix_A simétrica e retorna L, D e L^T juntos na mesma matriz
+def LDU(matrix_A):
     a = matrix_A.copy()
     n=len(a)
     for k in range(n-1):#resolve o sistem Lv=A
@@ -244,6 +245,7 @@ def solutionCholeski(L, b):
         x[k] = (y[k] - L[k+1:n, k]@x[k+1:n])/L[k, k]
     return x
 
+# Recebe matrizes coluna c, d, e, b e retorna a solução do sistema Ax=b em que A é uma matriz tridiagonal
 def tridiagonal(c,d,e,b):
   n=len(d)
   k=np.ones((n))
@@ -258,6 +260,7 @@ def tridiagonal(c,d,e,b):
     x[i]=k[i] - t[i]*x[i+1]
   return x  
 
+# Recebe matrizes coluna a, c, d, e, f, b e retorna a solução do sistema Ax=b em que A é uma matriz pentadiagonal
 def pentadiagonal(a,c,d,e,f,b):
   n=len(d)
   p=np.zeros((n))

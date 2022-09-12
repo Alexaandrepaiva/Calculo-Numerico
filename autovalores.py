@@ -1,7 +1,7 @@
 # Feito por Alexandre Paiva
 # Biblioteca de autovalores e autovetores criada para disciplina de Cálculo Numérico
 
-# Em algumas funções, talvez tenha-se que que importa algumas das seguintes bibliotecas
+# Em algumas funções, talvez tenha-se que que importar as seguintes bibliotecas
 import numpy as np
 from numpy import linalg as LA
 import matplotlib.pyplot as plt
