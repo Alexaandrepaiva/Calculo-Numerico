@@ -20,9 +20,11 @@ Caso você também queira usar esse repositório, basta seguir os seguintes pass
 ```
 from CalculoNumerico import zeros
 from CalculoNumerico import linearSystem as ls
-from CalculoNumerico import polinomios as pl
+from CalculoNumerico import interpolacao as ip
 from CalculoNumerico import autovalores as av
 ```
 
 ## Zeros de funções
 ## Sistemas Lineares
+## Autovalores e Autovetores
+## Interpolação Polinomial

@@ -1,3 +1,6 @@
+# Feito por Alexandre Paiva
+# Biblioteca de interpolação polinomial criada para disciplina de Cálculo Numérico
+
 def horner(c,z):
   "c= [c[n],c[n-1],...,c[1],c[0]] referente aos coeficientes do polinômio"
   "esse algoritmo avaliar o o polinômio de ordem p_n(x) no valor z"
