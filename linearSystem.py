@@ -192,6 +192,12 @@ def decompositionLU(matrix_A):
             L[i,j] = m
     return L, U
 
+def solutionLU(matrix_A,matrix_b):
+  L,U = decompositionLU(matrix_A)
+  ys = substSucessiva(L,matrix_b)
+  xs = substRetroativa(U,ys)
+  return xs
+
 # Decompoe matrix_A em LDL^T
 # Recebe matrix_A e retorna L, D e L^T juntos na mesma matriz
 def LDLT(matrix_A):
@@ -226,7 +232,7 @@ def choleski(A):
 
 # Resolve LL^T*X = B
 # Recebe L e B e retorna x
-def Sol_choleski(L, b):
+def solutionCholeski(L, b):
     n = len(b)
     x = np.zeros((n))
     y = np.zeros((n))
@@ -238,7 +244,7 @@ def Sol_choleski(L, b):
         x[k] = (y[k] - L[k+1:n, k]@x[k+1:n])/L[k, k]
     return x
 
-def Sol_Sist_Trid(c,d,e,b):
+def tridiagonal(c,d,e,b):
   n=len(d)
   k=np.ones((n))
   t=np.ones((n))
@@ -252,7 +258,28 @@ def Sol_Sist_Trid(c,d,e,b):
     x[i]=k[i] - t[i]*x[i+1]
   return x  
 
-def sol_jacobi(A, b, x0, kmax=100):
+def pentadiagonal(a,c,d,e,f,b):
+  n=len(d)
+  p=np.zeros((n))
+  t=np.zeros((n))
+  v= np.zeros((n))
+  x =np.zeros((n))
+  p[0]=b[0]/d[0]
+  t[0]=e[0]/d[0]
+  v[0]=f[0]/d[0]
+  for i in range(n):
+    l=c[i] - a[i]*t[i-2]
+    k=d[i] -l*t[i-1] -a[i]*v[i-2]
+    p[i] =(b[i] -a[i]*p[i-2] -l*p[i-1])/k
+    t[i]=(e[i]-l*v[i-1])/k
+    v[i]=f[i]/k
+  x[n-1]=p[n-1]
+  x[n-2]=p[n-2] - t[n-2]*x[n-1]
+  for i in reversed(range(n-2)):
+    x[i]=p[i] - t[i]*x[i+1] -v[i]*x[i+2]
+  return x
+
+def solutionJacobi(A, b, x0, kmax=100):
     """"""
     d = np.diag(A)
     for k in range(kmax):
@@ -264,7 +291,7 @@ def sol_jacobi(A, b, x0, kmax=100):
     return x0
 
 
-def sol_gaussseidel(A, b, x0, kmax):
+def solutionGaussSeidel(A, b, x0, kmax):
     M = np.tril(A)
     for k in range(kmax):
         r = b - A@x0
@@ -275,7 +302,7 @@ def sol_gaussseidel(A, b, x0, kmax):
     return x0
 
 
-def Sistema_Nao_L_Newton(f, x, tol=1.0e-9, kmax=100):
+def nonLinearNewton(f, x, tol=1.0e-9, kmax=100):
     def jacobiana(f, x):
         h = 1.0e-4
         n = len(x)
