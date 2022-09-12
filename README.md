@@ -18,5 +18,8 @@ Caso você também queira usar esse repositório, basta seguir os seguintes pass
 2. Para importar arquivos, importe um ou mais arquivo da seguinte maneira:
 
 ```
+from CalculoNumerico import zeros
 from CalculoNumerico import linearSystem as ls
+from CalculoNumerico import polinomios as pl
+from CalculoNu
 ```
