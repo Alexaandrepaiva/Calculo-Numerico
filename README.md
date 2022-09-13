@@ -43,7 +43,7 @@ O método do ponto fixo pode ser realizado através da função `fixedPoint` e c
 Seja $\epsilon$ uma raiz da equação $f(x)=0$, $I$ um intervalo centrado nessa raiz, $\phi$ uma função de iteração e $x_0$ o valor do chute inicial. O processe iterativo converge se:
 
 - $\phi$ e $\phi '$ são contínuas em $I$;
-- $|\phi '(x)|<1 \forall x \in I$;
+- $|\phi '(x)|<1$  $\forall x \in I$;
 - $x_0 \in I$
 
 
