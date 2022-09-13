@@ -23,6 +23,21 @@ from CalculoNumerico import autovalores as av
 ```
 
 ## Zeros de funções
+#### Método gráfico
+O método ggráfico consiste em fazer um esboço do gráfico da $f(x)$, para ter uma ideia de em que intervalo se encontram as raízes de $f(x)$. Esse método pode ser realizado através da função `graph`.
+
+#### Bisseção
+O método da bisseção pode ser realizado através da função `bissection` e tem como objetivo reduzir a amplitude do intervalo que contém a raiz até atingir a precisão desejada.
+
+#### Falsa posição
+O método da falsa posição pode ser realizado através da função `falsePosition` e tem o mesmo objetivo do método da bisseção, no entanto, reduz o intervalo por meio da média ponderada.
+
+#### Ponto fixo
+O método do ponto fixo pode ser realizado através da função `fixedPoint` e consiste em transformar a equação $f(x)=0$ em uma equação equivalente $x=\phi (x)$. Uma função $\phi$ que satisfaz a condição acima é chamada de Função de Iteração para a equação $f(x)=0$.
+
+#### Newton-Raphson
+O método de Newton-Raphson pode ser realizado através da função `newtonRaphson` e sua ideia é de tomar um valor de $x$ como primeira estimativa da raiz, calcular o valor da função para esse valor (que será diferente de zero), traçar a tangente à curva buscando o ponto em que essa tangente corta o eixo $x$. Esse novo valor de $x$ é uma melhor aproximação.
+
 ## Sistemas Lineares
 
 ### Métodos diretos
