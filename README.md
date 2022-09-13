@@ -76,7 +76,15 @@ O método de Gauss-Seidel pode ser realizado através da função `solutionGauss
 ## Autovalores e Autovetores
 As funções de autovalores e autovetores se encontram no arquivo <strong>autovalores.py</strong>.
 #### Método de Leverrier
-O método de Leverrier fornece o polinômio característico de uma matriz $A$, $nxn$ e método de Leverrier-Faddeev consiste em uma simplificação do método de Leverrier para o cálculo dos autovalores da matriz $A$ e também permite calcular seus autovetores
+O método de Leverrier fornece o polinômio característico de uma matriz $A$, $nxn$ e pode ser realizado através da função `leverrier`.
+#### Método de Leverrier-Faddeev
+O método de Leverrier-Faddeev consiste em uma simplificação do método de Leverrier para o cálculo dos autovalores da matriz $A$ e também permite calcular seus autovetores. Os autovetores de uma matriz podem ser encontrados através da função `autovetor`.
+
+O método de Leverrier-Faddev para obter os autovalores possui um pouco de instablidade e ainda precisamos encontrar as raízes de um polinômio caractéristico.
+#### Método $LR$
+O método $LR$ pode ser realizado através da função `methodLR` e tem o objetivo de encontrar os coeficientes do polinômio característico por meio de um processo iterativo iniciando com a decomposição $LU$ da matriz $A$, nesse arquivo executada pela função `decompositionLR`.
+#### Método $QR$
+O método $QR$ pode ser realizado através da função `methodQR` e tem o objetivo de encontrar os coeficientes do polinômio característico por meio da decomposição da matriz $A$ em $QR$, em que $Q$ é uma matriz ortogonal ($Q^TQ=I$) e $R$ é uma matriz triângular superior. Os autovalores podem ser encontrados por esse método com a função `autovaloresQR`.
 
 ## Interpolação Polinomial
 As funções de interpolação polinomial se encontram no arquivo <strong>interpolation.py</strong>.
