@@ -41,8 +41,10 @@ A decomposição de Choleski pode ser realizada através da função `choleski` 
 
 #### Outros tipos de sistemas
 - Matriz tridiagonal
+
 Pode-se resolver o sistema linear em que $A$ é uma matriz tridiagonal pela função `tridiagonal`.
 - Matriz pentadiagonal
+
     Pode-se resolver o sistema linear em que $A$ é uma matriz pentadiagonal pela função `pentadiagonal`.
 
 ### Métodos iterativos
