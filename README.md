@@ -37,6 +37,14 @@ O método da falsa posição pode ser realizado através da função `falsePosit
 #### Ponto fixo
 O método do ponto fixo pode ser realizado através da função `fixedPoint` e consiste em transformar a equação $f(x)=0$ em uma equação equivalente $x=\phi (x)$. Uma função $\phi$ que satisfaz a condição acima é chamada de Função de Iteração para a equação $f(x)=0$.
 
+```
+<strong>TEOREMA DO MÉTODO DO PONTO FIXO</strong>
+Seja $\epsilon$ uma raiz da equação $f(x)=0$, $I$ um intervalo centrado nessa raiz, $\phi$ uma função de iteração e $x_0$ o valor do chute inicial. O processe iterativo converge se:
+i. $\phi$ e $\phi '$ são contínuas em $I$;
+ii. $|\phi '(x)|<1 \forallx \in I$;
+iii. $x_0 \in I$
+```
+
 #### Newton-Raphson
 O método de Newton-Raphson pode ser realizado através da função `newtonRaphson` e sua ideia é de tomar um valor de $x$ como primeira estimativa da raiz, calcular o valor da função para esse valor (que será diferente de zero), traçar a tangente à curva buscando o ponto em que essa tangente corta o eixo $x$. Esse novo valor de $x$ é uma melhor aproximação.
 
