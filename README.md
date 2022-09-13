@@ -75,6 +75,8 @@ O método de Gauss-Seidel pode ser realizado através da função `solutionGauss
 
 ## Autovalores e Autovetores
 As funções de autovalores e autovetores se encontram no arquivo <strong>autovalores.py</strong>.
+#### Método de Leverrier
+O método de Leverrier fornece o polinômio característico de uma matriz $A$, $nxn$ e método de Leverrier-Faddeev consiste em uma simplificação do método de Leverrier para o cálculo dos autovalores da matriz $A$ e também permite calcular seus autovetores
 
 ## Interpolação Polinomial
 As funções de interpolação polinomial se encontram no arquivo <strong>interpolation.py</strong>.
