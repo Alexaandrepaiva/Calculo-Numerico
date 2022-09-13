@@ -94,7 +94,7 @@ O método de Leverrier-Faddev para obter os autovalores possui um pouco de insta
 #### Método $LR$
 O método $LR$ pode ser realizado através da função `methodLR` e tem o objetivo de encontrar os coeficientes do polinômio característico por meio de um processo iterativo iniciando com a decomposição $LU$ da matriz $A$, nesse arquivo executada pela função `decompositionLR`.
 #### Método $QR$
-O método $QR$ pode ser realizado através da função `methodQR` e tem o objetivo de encontrar os coeficientes do polinômio característico por meio da decomposição da matriz $A$ em $QR$, em que $Q$ é uma matriz ortogonal ($Q^TQ=I$) e $R$ é uma matriz triângular superior. Os autovalores podem ser encontrados por esse método com a função `autovaloresQR`.
+O método $QR$ pode ser realizado através da função `methodQR` e tem o objetivo de encontrar os coeficientes do polinômio característico por meio da decomposição da matriz $A$ em $QR$, em que $Q$ é uma matriz ortogonal ( $Q^TQ=I $) e $R$ é uma matriz triângular superior. Os autovalores podem ser encontrados por esse método com a função `autovaloresQR`.
 
 ## Interpolação Polinomial
 As funções de interpolação polinomial se encontram no arquivo <strong>interpolation.py</strong>.
