@@ -23,8 +23,10 @@ from CalculoNumerico import autovalores as av
 ```
 
 ## Zeros de funções
+As funções de zeros de funções se encontram no arquivo <strong>zeros.py</strong>.
+
 #### Método gráfico
-O método ggráfico consiste em fazer um esboço do gráfico da $f(x)$, para ter uma ideia de em que intervalo se encontram as raízes de $f(x)$. Esse método pode ser realizado através da função `graph`.
+O método gráfico consiste em fazer um esboço do gráfico da $f(x)$, para ter uma ideia de em que intervalo se encontram as raízes de $f(x)$. Esse método pode ser realizado através da função `graph`.
 
 #### Bisseção
 O método da bisseção pode ser realizado através da função `bissection` e tem como objetivo reduzir a amplitude do intervalo que contém a raiz até atingir a precisão desejada.
@@ -39,6 +41,7 @@ O método do ponto fixo pode ser realizado através da função `fixedPoint` e c
 O método de Newton-Raphson pode ser realizado através da função `newtonRaphson` e sua ideia é de tomar um valor de $x$ como primeira estimativa da raiz, calcular o valor da função para esse valor (que será diferente de zero), traçar a tangente à curva buscando o ponto em que essa tangente corta o eixo $x$. Esse novo valor de $x$ é uma melhor aproximação.
 
 ## Sistemas Lineares
+As funções de sistemas lineares se encontram no arquivo <strong>linearSystem.py</strong>.
 
 ### Métodos diretos
 Nesta classe de métodos a solução do sistema é obtida após um número finito de passos e são em geral baseados em métodos de eliminação onde se transforma o sistema a resolver em outro sistema de resolução mais fácil que o sistema original. Estes métodos são normalmente empregados na solução de sistemas de pequeno a médio porte em que a matriz de coeficientes é densa.
@@ -71,4 +74,17 @@ O método de Gauss-Jacobi pode ser realizado através da função `solutionJacob
 O método de Gauss-Seidel pode ser realizado através da função `solutionGaussSeidel`.
 
 ## Autovalores e Autovetores
+As funções de autovalores e autovetores se encontram no arquivo <strong>autovalores.py</strong>.
+#### Método de Leverrier
+O método de Leverrier fornece o polinômio característico de uma matriz $A$, $nxn$ e pode ser realizado através da função `leverrier`.
+#### Método de Leverrier-Faddeev
+O método de Leverrier-Faddeev consiste em uma simplificação do método de Leverrier para o cálculo dos autovalores da matriz $A$ e também permite calcular seus autovetores. Os autovetores de uma matriz podem ser encontrados através da função `autovetor`.
+
+O método de Leverrier-Faddev para obter os autovalores possui um pouco de instablidade e ainda precisamos encontrar as raízes de um polinômio caractéristico.
+#### Método $LR$
+O método $LR$ pode ser realizado através da função `methodLR` e tem o objetivo de encontrar os coeficientes do polinômio característico por meio de um processo iterativo iniciando com a decomposição $LU$ da matriz $A$, nesse arquivo executada pela função `decompositionLR`.
+#### Método $QR$
+O método $QR$ pode ser realizado através da função `methodQR` e tem o objetivo de encontrar os coeficientes do polinômio característico por meio da decomposição da matriz $A$ em $QR$, em que $Q$ é uma matriz ortogonal ($Q^TQ=I$) e $R$ é uma matriz triângular superior. Os autovalores podem ser encontrados por esse método com a função `autovaloresQR`.
+
 ## Interpolação Polinomial
+As funções de interpolação polinomial se encontram no arquivo <strong>interpolation.py</strong>.

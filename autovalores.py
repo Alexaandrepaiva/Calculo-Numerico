@@ -1,5 +1,5 @@
 # Feito por Alexandre Paiva
-# Biblioteca de autovalores e autovetores criada para disciplina de Cálculo Numérico
+# Biblioteca de autovalores e autovetorores criada para disciplina de Cálculo Numérico
 
 # Em algumas funções, talvez tenha-se que que importar as seguintes bibliotecas
 import numpy as np
@@ -28,7 +28,7 @@ def plot_vect(x, b, xlim, ylim):
   plt.legend()
 # plot_vect(x,b,(0,3),(0,2))
 
-def faddeev_leverrier(A):
+def leverrier(A):
     A = np.array(A) #garantir que a matriz é quadrada
     n = A.shape[0]
     assert A.shape[1] == n, 'Matriz deve ser quadrada!'
@@ -41,7 +41,7 @@ def faddeev_leverrier(A):
         Ak = np.dot(A, Ak)
     return (-1)**n*a
 
-def autovet(A,autvalx):
+def autovetor(A,autvalx):
     """ Algoritmo retirado do livro Métodos de Cálculo Numérico, Dieguez(2015), pag 177""" 
     A = np.array(A) #garantir que a matriz é quadrada
     n = A.shape[0]
@@ -61,7 +61,40 @@ def autovet(A,autvalx):
         X[:,k]/= LA.norm(X[:,k])
     return X
 
-def dec_lr(A):
+def  horner(c,z):
+  "c= [c[n],c[n-1],...,c[1],c[0]] referente aos coeficientes do polinômio"
+  "esse algoritmo avaliar o o polinômio de ordem p_n(x) no valor z"
+  n=len(c)-1 # grau do polinômio
+  b=[]
+  b.append(c[0])
+  for k in range(1,n+1):
+    b.append(c[k]+b[k-1]*z)
+  y=b[n]
+  q=b[ :-1 ]  #coeficientes do polinômio associado
+  #qin = q[: :-1]
+  return y,q
+
+def  newtonhorner(c,r0,tol=1.e-04,kmax=100):
+  n=len(c)-1 # grau do polinômio
+  raizes=[]
+  iter =[]
+  for k in range(n):
+    niter =0
+    r=r0
+    delta = tol +1
+    while niter < kmax and delta >= tol:
+      [pr,b]=horner(c,r)
+      [dpr,b]=horner(b,r)
+      rnovo= r -pr/dpr
+      delta = abs(rnovo - r)
+      niter =niter+1
+      r=rnovo
+    [pr,c]=horner(c,r)
+    raizes.append(r)
+    iter.append(niter)
+  return raizes,iter
+
+def decompositionLR(A):
   "esta função é igual a decomposição LU"
   n = A.shape[0]
   R = np.copy(A)
@@ -73,10 +106,10 @@ def dec_lr(A):
       L[i,j] = m
   return L, R
 
-def metodo_lr(A,kmax=200):
+def methodLR(A,kmax=200):
   Ak = np.copy(A)
   for k in range(kmax):
-    L,R = dec_lr(Ak)
+    L,R = decompositionLR(Ak)
     Ak = R@L
   auto_valor = np.diag(Ak)
   return auto_valor , Ak, R
@@ -93,7 +126,7 @@ def householder(x,k):
   H = np.eye(n) - 2*np.outer(w,w.T)
   return H
 
-def meu_QR(A):
+def methodQR(A):
   "fatoração QR"
   n=A.shape[0]
   R= np.copy(A)
@@ -104,10 +137,10 @@ def meu_QR(A):
     Q=Q@H
   return Q , R
 
-def autoval_qr(A,kmax=200):
+def autovaloresQR(A,kmax=200):
   T = np.copy(A)
   for k in range(kmax):
-    Q,R = meu_QR(T)
+    Q,R = methodQR(T)
     T = R@Q
   auto_valor = np.diag(T)
   return auto_valor , T
