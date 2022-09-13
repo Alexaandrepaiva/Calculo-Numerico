@@ -39,10 +39,12 @@ O método do ponto fixo pode ser realizado através da função `fixedPoint` e c
 
 
 <strong>TEOREMA DO MÉTODO DO PONTO FIXO</strong>
+
 Seja $\epsilon$ uma raiz da equação $f(x)=0$, $I$ um intervalo centrado nessa raiz, $\phi$ uma função de iteração e $x_0$ o valor do chute inicial. O processe iterativo converge se:
-i. $\phi$ e $\phi '$ são contínuas em $I$;
-ii. $|\phi '(x)|<1 \forallx \in I$;
-iii. $x_0 \in I$
+
+- $\phi$ e $\phi '$ são contínuas em $I$;
+- $|\phi '(x)|<1 \forall x \in I$;
+- $x_0 \in I$
 
 
 #### Newton-Raphson
