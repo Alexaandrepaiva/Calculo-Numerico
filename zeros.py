@@ -70,6 +70,18 @@ def fixedPoint(f, phi, initialValue = 0, tolerance = 1e-5, iterationNumber = 1e5
 #raiz, iteracoes = zeros.fixedPoint(f, phi, -1, 0.001, 10)
 #print('A raiz de f pelo método da iteração de ponto fixo é {:.7f} e com {} iteracoes.'.format(raiz, iteracoes))
 
+# declaração da função dada
+# declaração da função de iteração
+def fixedPointBra(f, phi, x0, tol = 1e-5, maxIter = 1e5):
+    x_k = [x0]
+    k = 0
+    while(abs(f(x_k[-1])) > tol and k < maxIter):
+        x_next = phi(x_k[-1])
+        x_k.append(x_next)
+        k += 1
+    return x_k[-1]
+# root = fixedPointBra(f, phi, -1, 0.0001, 10);
+# print('Método do ponto fixo: a raiz vale ' + str(root));
 
 #Definir f(x)
 #Definir dfdx(x)
