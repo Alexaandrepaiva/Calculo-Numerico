@@ -3,6 +3,8 @@
 ## Sobre
 Esse repositório foi feito pelo aluno Alexandre de Paiva Almeida para ser usado na disciplina de Cálculo Numérico no quarto semestre do Ciclo Básico do Instituto Militar de Engenharia.
 
+Autores: Alexandre Paiva e Camila Cardi
+
 ## Instalação
 Se lhe convier usar esse repositório, é possível cloná-lo no Colab, basta seguir os seguintes passos:
 
