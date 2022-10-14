@@ -1,0 +1,40 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
+plt.style.use('_mpl-gallery')
+
+
+def integral(funcao, a, b, iter=10000):
+    I = 0.
+    h = (b-a)/iter
+    for i in range(iter):
+        I += (funcao(a+i*h)+funcao(a+(i+1)*h))*h/2
+    return I
+
+
+def f(t):
+    if t <= 1/2:
+        return 2
+    if t > 1/2:
+        return 1
+
+
+def g(s):
+    z = 1
+    def funcao(t): return f(t)*z*(z**2+(s-t)**2)**(-3/2)
+
+    return integral(funcao, 0, 1)
+
+# make data
+x = np.linspace(0, 1, 10000)
+y = g(x)
+
+# plot
+fig, ax = plt.subplots()
+
+ax.plot(x, y, linewidth=2.0)
+
+ax.set(xlim=(0, 1), xticks=np.arange(0, 1),
+       ylim=(-8, 8), yticks=np.arange(-8, 8))
+
+plt.show()
