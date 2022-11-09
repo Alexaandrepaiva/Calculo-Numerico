@@ -99,4 +99,23 @@ O método $LR$ pode ser realizado através da função `methodLR` e tem o objeti
 O método $QR$ pode ser realizado através da função `methodQR` e tem o objetivo de encontrar os coeficientes do polinômio característico por meio da decomposição da matriz $A$ em $QR$, em que $Q$ é uma matriz ortogonal $(Q^TQ=I)$ e $R$ é uma matriz triângular superior. Os autovalores podem ser encontrados por esse método com a função `autovaloresQR`.
 
 ## Interpolação Polinomial
+Existe e é unico o polinômio $p_n(x)$ de grau $<=n$ que se aproxima a $f(x)$ em $n+1$ pontos distintos tal que: $f(x_k)=p_n(x_k), k=0,1,2,...,n$. 
+
+#### Formas de Interpolação
+Sejam $x_0, x_1, ..., x_n$, $n+1$ pontos distintos e $y_i=f(x_i), i=0, 1, ..., n$. Podemos representar $p_n(x)$ na forma $p_n(x)=y_0L_0(X) + y_1L_1(X) + ... + y_nL_n(X)$, em que $L_n(x)$ são os polinômios de grau $<=n$. Para cada $i$, deve-se satisfazer a equação de que $p_n(x_i)=y_i$. Obtem-se:
+$p_n(x)= sum of ...$
+
+
 As funções de interpolação polinomial se encontram no arquivo <strong>interpolation.py</strong>.
+
+## Ajustes de curvas
+As funções de interpolação polinomial se encontram no arquivo <strong>ajuste.py</strong>.
+
+## Integral
+As funções de integral se encontram no arquivo <strong>integral.py</strong>.
+
+## Equação Diferencial Ordinária
+As funções de E.D.O. se encontram no arquivo <strong>edo.py</strong>.
+
+## Equação Diferencial Dependente
+As funções de E.D.P. se encontram no arquivo <strong>edp.py</strong>.
