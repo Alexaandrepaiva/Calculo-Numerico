@@ -115,7 +115,16 @@ As funções de interpolação polinomial se encontram no arquivo <strong>ajuste
 As funções de integral se encontram no arquivo <strong>integral.py</strong>.
 
 ## Equação Diferencial Ordinária
-As funções de E.D.O. se encontram no arquivo <strong>edo.py</strong>.
+As funções de E.D.O. se encontram nos arquivos da pasta <strong>EDO</strong>.
+
+#### Método de Euler
+Seja: 
+$$\dfrac{ds(t)}{dt}=F(t,s(t))$$ 
+Uma aproximação linear de $s(t)$ em torno de $t_j$ e $t_{j+1}$ é: 
+$$s(t_{j+1}=s(t_j)+(t_{j+1}-t_j)\dfrac{ds(t_j)}{dt}$$
+ou ainda:
+$$s(t_{j+1}=s(t_j)+h\cdot F(t_j,s(t_j))$$
+Essa última equação é conhecida como a forma explícita de Euler e o código da função de Euler está no arquivo <strong>euler.py</strong
 
 ## Equação Diferencial Dependente
 As funções de E.D.P. se encontram no arquivo <strong>edp.py</strong>.
