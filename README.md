@@ -115,16 +115,29 @@ As funções de interpolação polinomial se encontram no arquivo <strong>ajuste
 As funções de integral se encontram no arquivo <strong>integral.py</strong>.
 
 ## Equação Diferencial Ordinária
-As funções de E.D.O. se encontram nos arquivos da pasta <strong>EDO</strong>.
+As funções de E.D.O. se encontram no arquivo <strong>edo.py</strong> e os arquivos da pasta <strong>EDO</strong> apresentam alguns exemplos.
 
 #### Método de Euler
+A resolução de E.D.O. pelo método de Euler pode ser realizada através da função `EDO_Euler`.
 Seja: 
 $$\dfrac{ds(t)}{dt}=F(t,s(t))$$ 
 Uma aproximação linear de $s(t)$ em torno de $t_j$ e $t_{j+1}$ é: 
 $$s(t_{j+1}=s(t_j)+(t_{j+1}-t_j)\dfrac{ds(t_j)}{dt}$$
 ou ainda:
 $$s(t_{j+1}=s(t_j)+h\cdot F(t_j,s(t_j))$$
-Essa última equação é conhecida como a forma explícita de Euler e o código da função de Euler está no arquivo <strong>euler.py</strong
+Essa última equação é conhecida como a forma explícita de Euler e o código da função de Euler está no arquivo <strong>euler.py</strong>
+
+#### Método de Heun
+A resolução de E.D.O. pelo método de Heun pode ser realizada através da função `EDO_Heun`.
+Seja: 
+$$\dfrac{ds(t)}{dt}=F(t,s(t))$$
+$$s(t)\vert_{t_j}^{t_{j+1}} = s(t_{j+1}) - s(t_{j}) = \int_{t_j}^{t_{j+1}}F(t,s(t)dt $$
+$$ s(t_{j+1})  = s(t_{j}) + \int_{t_j}^{t_{j+1}}F(t,s(t)dt $$
+com $s(t_0) = s_0$
+Formula Trapezoidal
+$$ s(t_{j+1}) = s(t_j) + \dfrac{h}{2}(F(t_j,s(t_{j})+ F(t_{j+1},s(t_{j+1})) $$
+$$s(t_{j+1}) \approx s(t_j) + h(F(t_j,s(t_{j})$$
+$$ s(t_{j+1}) = s(t_j) + \dfrac{h}{2}(F(t_j,s(t_{j})+ F(t_{j+1},s(t_{j+1}) + h(F(t_j,s(t_{j})) $$
 
 ## Equação Diferencial Dependente
 As funções de E.D.P. se encontram no arquivo <strong>edp.py</strong>.

@@ -1,3 +1,4 @@
+#Também conhecido como o método trapezoidal
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -7,28 +8,23 @@ import matplotlib.pyplot as plt
 # ‘seaborn-dark’, ‘seaborn-dark-palette’, ‘seaborn-darkgrid’, ‘seaborn-deep’, ‘seaborn-muted’, 
 # ‘seaborn-notebook’, ‘seaborn-paper’, ‘seaborn-pastel’, ‘seaborn-poster’,’seaborn-talk’,
 # ’seaborn-ticks’,’seaborn-white’,’seaborn-whitegrid’,’tableau-colorblind10′
-plt.style.use('seaborn-notebook')
+plt.style.use('Solarize_Light2')
 
+def EDO_Heun(f,t0,tf,s0=0,n=100):
+  h=(tf -t0)/n
+  t = np.arange(t0, tf + h, h)
+  s = np.zeros(len(t))
+  s[0] = s0
+  for i in range(0,len(t) -1):
+    s[i + 1] = s[i] + h*f(t[i], s[i]) #primeira aproximação
+    s[i+1] = s[i] + (h/2)*(f(t[i], s[i]) + f(t[i+1], s[i+1])) # Fórmula de Heun
+  return [t,s]
 
-# Definir os parâmetros
-# EDO
 f = lambda t, s: np.exp(-t)
-#Tamanho do espaçamento
-h = 0.1
-# Tempo discretizado
-t = np.arange(0, 1 + h, h)
-# Condição inicial
-s0=-1
-# Método Explicito de Euler
-s = np.zeros(len(t))
-s[0] = s0
-
-for i in range(0,len(t) -1):
-  s[i + 1] = s[i] + h*f(t[i], s[i])
-
+[t,s] = EDO_Heun(f,0,1,-1,2)
 # gráfico
 plt.figure(figsize = (12, 8))
-plt.plot(t, s, "r--", label="Aproximação")
+plt.plot(t, s, "y--", label="Aproximação")
 plt.plot(t, -np.exp(-t), "g", label="Exato")
 plt.title("Solução Exata e Aproximada de EDO")
 plt.xlabel("t")
