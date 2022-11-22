@@ -118,7 +118,7 @@ As funções de integral se encontram no arquivo <strong>integral.py</strong>.
 As funções de E.D.O. se encontram no arquivo <strong>edo.py</strong> e os arquivos da pasta <strong>EDO</strong> apresentam alguns exemplos.
 
 #### Método de Euler
-A resolução de E.D.O. pelo método de Euler pode ser realizada através da função `EDO_Euler`.
+A resolução de E.D.O. pelo método de Euler pode ser realizada através da função `ODE_Euler`.
 Seja: 
 $$\dfrac{ds(t)}{dt}=F(t,s(t))$$ 
 Uma aproximação linear de $s(t)$ em torno de $t_j$ e $t_{j+1}$ é: 
@@ -128,7 +128,7 @@ $$s(t_{j+1}=s(t_j)+h\cdot F(t_j,s(t_j))$$
 Essa última equação é conhecida como a forma explícita de Euler e o código da função de Euler está no arquivo <strong>euler.py</strong>
 
 #### Método de Heun
-A resolução de E.D.O. pelo método de Heun pode ser realizada através da função `EDO_Heun`.
+A resolução de E.D.O. pelo método de Heun pode ser realizada através da função `ODE_Heun`.
 Seja: 
 $$\dfrac{ds(t)}{dt}=F(t,s(t))$$
 $$s(t)\vert_{t_j}^{t_{j+1}} = s(t_{j+1}) - s(t_{j}) = \int_{t_j}^{t_{j+1}}F(t,s(t)dt $$
@@ -138,6 +138,54 @@ Formula Trapezoidal
 $$ s(t_{j+1}) = s(t_j) + \dfrac{h}{2}(F(t_j,s(t_{j})+ F(t_{j+1},s(t_{j+1})) $$
 $$s(t_{j+1}) \approx s(t_j) + h(F(t_j,s(t_{j})$$
 $$ s(t_{j+1}) = s(t_j) + \dfrac{h}{2}(F(t_j,s(t_{j})+ F(t_{j+1},s(t_{j+1}) + h(F(t_j,s(t_{j})) $$
+
+#### Método de Runge-Kutta
+O método Runge-Kutta (RK4) de quarta ordem com um erro de truncamento de $O (h^4)$ é um dos métodos mais amplamente usados para resolver equações diferenciais. A resolução de E.D.O. pelo método de Runge-Kutta de quarta ordem pode ser realizada através da função `ODE_RK4`.
+$$ s(t_{j+1}) = s(t_j) + \dfrac{h}{6}(f_1 + 2f_2 + 2f_3 + f_4) $$
+Em que:
+$$ f_1 = F(t_j,s(t_{j}))$$
+$$f_2 = F(t_{j} + \dfrac{h}{2},s(t_j) + f_1 \dfrac{h}{2} )$$
+$$f_3 = F(t_{j} + \dfrac{h}{2},s(t_j) + f_2 \dfrac{h}{2} )$$
+$$f_4 = F(t_{j} + h,s(t_j) + f_3h )$$
+
+#### Método de Adams
+São métodos lineares de passo múltiplo, onde um métode de passo $k$ pode ser dado por: 
+$$ \alpha_{k}s_{i+k} + \alpha_{k-1}s_{i+k-1} + \cdots + \alpha_{-1}s_{i-1} + \alpha_{0}s_{i} = h(\beta_{k}F_{i+k} + \cdots +\beta_{0}F_{i})$$
+onde $\alpha$ e $\beta$ é para cada método particular, sujeitas a s condições $\alpha_{k}=1$ e $\vert \alpha_0 \vert + \vert \beta_0 \vert \ne 0$ , sendo $F_i =F(t_i, s(t_i))$
+Saõ definidos uma família de métodos de Adams, onde podem serem classicados de Explícitos, chamados de Adams-Bashforth, e de métodos Implícitos, chamados com Adams-Moulton. Quando $\beta_k= 0 $, o método é dito explícito e para $\beta_k \ne 0 $ é dito implícito.
+Os métodos são obtidos por integração do PVI e para uma EDO de 1ª ordem é dada por:
+$$ s_{i+1}= s_i + \int_{t_i}^{t_{i+1}}F(t,s(t)dt$$
+A técnica para obter os coefientes é de aproximar $F(t,s(t) $ com uma aproximação de um polinômio inteporlador, usando  o método de lagrange o polinômio será $l(t)$.
+$$ s_{i+1}= s_i + \int_{t_i}^{t_{i+1}}l(t)dt$$
+
+
+#### Método de Shooting
+O método Shooting (tiro) foi desenvolvido com o objetivo de transformar um PVC em um PVI equivalente para que possamos resolvê-lo usando os métodos anteriores.
+$$\begin{cases}\dfrac{d^2s(t)}{dt^2}= F(t,s(t),s'(t)) \\ s(t_0) = s_0 \;\;\;\;\;\;\;\; s'(t_0)=v_0
+\end{cases}$$
+
+Uma maneira de proceder na resolução  é adivinhar $s'(t_0)$ e, em seguida, realizar a solução do problema de valor inicial resultante até $t_f$, e verificar se a solução calculada seja
+$s_f$, ou seja, $s(t_f)=s_f$. 
+
+Se isso não acontecer (o que é bastante provável), podemos voltar e mudar
+nossa estimativa para $s'(t_0)$.
+
+Repetir este procedimento até atingirmos o alvo $s_f$.
+ 
+Pode ser um bom método, se pudermos aprender algo com as várias tentativas. Existem maneiras sistemáticas de utilizar esta informação, e o método resultante é conhecido pelo apelido de tiro.
+
+Observamos que o valor final $s(t_f)=s_f$ da solução do nosso problema de valor inicial depende
+na suposição feita para $s'(t_0)$. Todo o resto permanece corrigido neste problema. Assim, a equação diferencial $\dfrac{d^2s(t)}{dt^2}= F(t,s(t),s'(t))$ e o primeiro valor inicial, $s(t_0) = s_0$ , não mudam.
+
+Se atribuirmos um valor real $z$ à condição inicial ausente,
+$s'(t_0) =z $ então, o problema do valor inicial pode ser resolvido numericamente. O valor de $s$ em $t_f$ agora é um função de $z$, que denotamos por $\phi(z)$. Em outras palavras, para cada escolha de $z$, obtemos um novo valor para $s(t_f)$, e $\phi$ é o nome da função com este comportamento. 
+
+Nós sabemos muito pouco sobre $\phi(z)$, mas podemos computá-lo ou avaliá-lo. 
+
+É, no entanto, uma função cara para
+avaliar porque cada valor de $\phi(z)$ é obtido somente após resolver um problema de valor inicial.
+
+Deve ser enfatizado que o método de tiro combina qualquer algoritmo para o problema de valor inicial com qualquer algoritmo para encontrar o zero de uma função. A escolha de esses dois algoritmos devem refletir a natureza do problema a ser resolvido.
 
 ## Equação Diferencial Dependente
 As funções de E.D.P. se encontram no arquivo <strong>edp.py</strong>.
